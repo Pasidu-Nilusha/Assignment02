@@ -1,4 +1,4 @@
-detaset:-https://www.kaggle.com/datasets/aiexplorer77/gaming-vs-academic-performance?resource=download&select=Gaming_Academic_Performance.csv
+
                                        
 library(shiny)
 library(shinydashboard)
