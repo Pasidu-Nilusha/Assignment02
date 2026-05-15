@@ -1,11 +1,8 @@
-dataset:-https://www.kaggle.com/datasets/aiexplorer77/gaming-vs-academic-performance?resource=download&select=Gaming_Academic_Performance.csv
-                                       
 library(shiny)
 library(shinydashboard)
 library(tidyverse)
 library(plotly)
 
-# Load the dataset
 gaming_data <- read.csv("Gaming.csv")
 
 ui <- dashboardPage(
@@ -25,7 +22,7 @@ ui <- dashboardPage(
   dashboardBody(
     tabItems(
       
-      # Tab 1: Scatter Plot
+
       tabItem(tabName = "trend",
               fluidRow(
                 box(title = "Gaming Hours vs Grades", width = 12,
@@ -33,7 +30,7 @@ ui <- dashboardPage(
               )
       ),
       
-      # Tab 2: Correlation Analysis
+      
       tabItem(tabName = "impact",
               fluidRow(
                 box(title = "Correlation Analysis", width = 12,
@@ -41,7 +38,7 @@ ui <- dashboardPage(
               )
       ),
       
-      # Tab 3: Grade Distribution (Replacing individual student bar chart)
+     
       tabItem(tabName = "growth",
               fluidRow(
                 box(title = "Distribution of Grades", width = 12,
@@ -49,7 +46,7 @@ ui <- dashboardPage(
               )
       ),
       
-      # Tab 4: Regression Model
+      
       tabItem(tabName = "prediction",
               fluidRow(
                 box(title = "Regression Model", width = 12,
@@ -63,7 +60,7 @@ ui <- dashboardPage(
 
 server <- function(input, output) {
   
-  # Scatter plot: Gaming Hours vs Grades
+ 
   output$trendPlot <- renderPlotly({
     p <- ggplot(gaming_data, aes(x = gaming_hours, y = grades)) +
       geom_point(aes(text = paste("Student ID:", student_id)), 
@@ -75,7 +72,7 @@ server <- function(input, output) {
     ggplotly(p)
   })
   
-  # Correlation plot with regression line
+  
   output$impactPlot <- renderPlotly({
     p <- ggplot(gaming_data, aes(x = gaming_hours, y = grades)) +
       geom_point(alpha = 0.2, color = "blue") +
@@ -86,7 +83,7 @@ server <- function(input, output) {
     ggplotly(p)
   })
   
-  # Distribution of Grades (Replaced bar chart due to high row count)
+
   output$growthPlot <- renderPlotly({
     p <- ggplot(gaming_data, aes(x = grades)) +
       geom_histogram(fill = "darkgreen", bins = 30, color = "white") +
@@ -95,7 +92,7 @@ server <- function(input, output) {
     ggplotly(p)
   })
   
-  # Regression model visualization
+ 
   output$predictionPlot <- renderPlotly({
     model <- lm(grades ~ gaming_hours, data = gaming_data)
     p <- ggplot(gaming_data, aes(x = gaming_hours, y = grades)) +
